@@ -240,32 +240,69 @@
     </script>
     <script>
         async function planlariYukle() {
-            const container = document.querySelector(".container");
+            const container = document.getElementById("plan-container");
             try {
                 const res = await fetch("plans.json");
+                if (!res.ok) throw new Error("plans.json faylı tapılmadı və ya yüklənə bilmədi");
                 const plans = await res.json();
 
                 plans.forEach(plan => {
-                    const planHtml = `
-                    <div class="meal-day">
-                      <div class="meal-header" onclick="toggleContent(this)">${plan.gun} (${plan.kalori} kcal)</div>
-                      <div class="meal-content">
-                        <ul>
-                          ${plan.menyu.map(item => `<li><strong>${item.ad}:</strong> ${item.təsvir}</li>`).join("")}
-                        </ul>
-                      </div>
-                    </div>
-                  `;
-                    container.insertAdjacentHTML("beforeend", planHtml);
+                    const html = `
+            <div class="meal-day">
+              <div class="meal-header" onclick="toggleContent(this)">${plan.gun} (${plan.kalori} kcal)</div>
+              <div class="meal-content">
+                <ul>
+                  ${plan.menyu.map(item => `<li><strong>${item.ad}:</strong> ${item.təsvir}</li>`).join("")}
+                </ul>
+              </div>
+            </div>
+          `;
+                    container.insertAdjacentHTML("beforeend", html);
                 });
             } catch (err) {
                 console.error("Plan yüklənərkən xəta:", err);
+                const fallback = `<p style="color: orange;">Planlar yüklənmədi. Zəhmət olmasa <code>plans.json</code> faylının mövcudluğunu və düzgün yerləşməsini yoxlayın.</p>`;
+                container.innerHTML = fallback;
             }
         }
 
         window.addEventListener("DOMContentLoaded", planlariYukle);
     </script>
+    <script>
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            console.log(e);
 
+            e.preventDefault();
+            deferredPrompt = e;
+            const installBtn = document.createElement('button');
+            installBtn.textContent = 'Tətbiq kimi quraşdır';
+            installBtn.style.position = 'fixed';
+            installBtn.style.bottom = '20px';
+            installBtn.style.right = '20px';
+            installBtn.style.padding = '10px 15px';
+            installBtn.style.backgroundColor = '#ff9800';
+            installBtn.style.color = '#fff';
+            installBtn.style.border = 'none';
+            installBtn.style.borderRadius = '6px';
+            installBtn.style.cursor = 'pointer';
+            installBtn.style.zIndex = '1000';
+            document.body.appendChild(installBtn);
+
+            installBtn.addEventListener('click', () => {
+                installBtn.remove();
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        console.log('İstifadəçi quraşdırmanı qəbul etdi');
+                    } else {
+                        console.log('İstifadəçi quraşdırmanı rədd etdi');
+                    }
+                    deferredPrompt = null;
+                });
+            });
+        });
+    </script>
 
 </body>
 
