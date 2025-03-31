@@ -1,0 +1,172 @@
+[
+  {
+    "gun": "Bazar ertəsi",
+    "kalori": 2200,
+    "menyu": [
+      {
+        "ad": "Səhər yeməyi",
+        "təsvir": "Fransız Omleti (3 yumurta, pomidor, ispanaq, parmesan pendiri)"
+      },
+      {
+        "ad": "Qəlyanaltı",
+        "təsvir": "Qızardılmış badam və alma"
+      },
+      {
+        "ad": "Günorta yeməyi",
+        "təsvir": "Qril toyuq, qəhvəyi düyü və brokkoli"
+      },
+      {
+        "ad": "Məşqdən sonra",
+        "təsvir": "Protein shake"
+      },
+      {
+        "ad": "Axşam yeməyi",
+        "təsvir": "Rozmarinlə qızardılmış mal əti və salat"
+      }
+    ]
+  },
+  {
+    "gun": "Çərşənbə axşamı",
+    "kalori": 2000,
+    "menyu": [
+      {
+        "ad": "Səhər yeməyi",
+        "təsvir": "Yulaf sıyığı"
+      },
+      {
+        "ad": "Qəlyanaltı",
+        "təsvir": "Armud və pendir"
+      },
+      {
+        "ad": "Günorta yeməyi",
+        "təsvir": "Mərci şorbası və salat"
+      },
+      {
+        "ad": "Axşam yeməyi",
+        "təsvir": "Balıq və tərəvəzlər"
+      }
+    ]
+  },
+  {
+    "gun": "Çərşənbə",
+    "kalori": 2200,
+    "menyu": [
+      {
+        "ad": "Səhər yeməyi",
+        "təsvir": "Qaynadılmış yumurta, avokado, tam buğda çörəyi"
+      },
+      {
+        "ad": "Qəlyanaltı",
+        "təsvir": "Fındıq və quru ərik"
+      },
+      {
+        "ad": "Günorta yeməyi",
+        "təsvir": "Sarımsaqla bişmiş mal əti, qarabaşaq, tərəvəz"
+      },
+      {
+        "ad": "Məşqdən sonra",
+        "təsvir": "Çiyələkli protein smoothie"
+      },
+      {
+        "ad": "Axşam yeməyi",
+        "təsvir": "Toyuq döşü salatı"
+      }
+    ]
+  },
+  {
+    "gun": "Cümə axşamı",
+    "kalori": 1800,
+    "menyu": [
+      {
+        "ad": "Səhər yeməyi",
+        "təsvir": "Qatıq, qoz və bal"
+      },
+      {
+        "ad": "Qəlyanaltı",
+        "təsvir": "Alma dilimləri və çərəzlər"
+      },
+      {
+        "ad": "Günorta yeməyi",
+        "təsvir": "Noxud salatı"
+      },
+      {
+        "ad": "Axşam yeməyi",
+        "təsvir": "İtalyan omleti"
+      }
+    ]
+  },
+  {
+    "gun": "Cümə",
+    "kalori": 2200,
+    "menyu": [
+      {
+        "ad": "Səhər yeməyi",
+        "təsvir": "Yumurta ağı və ispanaqlı omlet, tam buğda çörəyi"
+      },
+      {
+        "ad": "Qəlyanaltı",
+        "təsvir": "Qatıq və giləmeyvə"
+      },
+      {
+        "ad": "Günorta yeməyi",
+        "təsvir": "Toyuq döşü, şirin kartof, yaşıl salat"
+      },
+      {
+        "ad": "Məşqdən sonra",
+        "təsvir": "Vanilli protein shake"
+      },
+      {
+        "ad": "Axşam yeməyi",
+        "təsvir": "Mal əti filetosu və tərəvəz"
+      }
+    ]
+  },
+  {
+    "gun": "Şənbə",
+    "kalori": 2300,
+    "menyu": [
+      {
+        "ad": "Səhər yeməyi",
+        "təsvir": "Yulaf sıyığı, banan, fıstıq əzməsi"
+      },
+      {
+        "ad": "Qəlyanaltı",
+        "təsvir": "Qarışıq çərəzlər"
+      },
+      {
+        "ad": "Günorta yeməyi",
+        "təsvir": "Toyuq döşü, qarabaşaq, tərəvəz"
+      },
+      {
+        "ad": "Məşqdən sonra",
+        "təsvir": "Protein smoothie"
+      },
+      {
+        "ad": "Axşam yeməyi",
+        "təsvir": "Mal əti salatı"
+      }
+    ]
+  },
+  {
+    "gun": "Bazar",
+    "kalori": 1700,
+    "menyu": [
+      {
+        "ad": "Səhər yeməyi",
+        "təsvir": "Qaynadılmış yumurta və çörək"
+      },
+      {
+        "ad": "Qəlyanaltı",
+        "təsvir": "Mövsümi meyvələr"
+      },
+      {
+        "ad": "Günorta yeməyi",
+        "təsvir": "Balıq və ya dəniz məhsulu salatı"
+      },
+      {
+        "ad": "Axşam yeməyi",
+        "təsvir": "Tərəvəz şorbası və salat"
+      }
+    ]
+  }
+]

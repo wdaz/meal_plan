@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="az">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Həftəlik Qida Planı</title>
+    <style>
+        :root {
+            --bg-color: #121212;
+            --text-color: #e0e0e0;
+            --card-bg: #1e1e1e;
+            --accent: #333;
+            --border-color: #444;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+            padding: 20px;
+        }
+
+        h2,
+        h3 {
+            color: var(--text-color);
+        }
+
+        .meal-day {
+            margin-bottom: 20px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .meal-header {
+            background-color: var(--accent);
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .meal-content {
+            display: none;
+            padding: 10px 20px;
+            background-color: var(--card-bg);
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            font-size: 16px;
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 15px;
+            background-color: var(--accent);
+            color: var(--text-color);
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        function toggleContent(element) {
+            const content = element.nextElementSibling;
+            content.style.display = content.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function filterDays() {
+            const query = document.getElementById('search').value.toLowerCase();
+            const days = document.querySelectorAll('.meal-day');
+            days.forEach(day => {
+                const text = day.innerText.toLowerCase();
+                day.style.display = text.includes(query) ? 'block' : 'none';
+            });
+        }
+
+        function toggleTheme() {
+            const root = document.documentElement;
+            const current = getComputedStyle(root).getPropertyValue('--bg-color').trim();
+            const isDark = current === '#121212';
+
+            if (isDark) {
+                root.style.setProperty('--bg-color', '#ffffff');
+                root.style.setProperty('--text-color', '#121212');
+                root.style.setProperty('--card-bg', '#f5f5f5');
+                root.style.setProperty('--accent', '#e0e0e0');
+                root.style.setProperty('--border-color', '#ccc');
+            } else {
+                root.style.setProperty('--bg-color', '#121212');
+                root.style.setProperty('--text-color', '#e0e0e0');
+                root.style.setProperty('--card-bg', '#1e1e1e');
+                root.style.setProperty('--accent', '#333');
+                root.style.setProperty('--border-color', '#444');
+            }
+        }
+    </script>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#121212">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <button class="theme-toggle" onclick="toggleTheme()">Rejim dəyiş</button>
+    <div class="container">
+        <h2>Həftəlik Qida Planı</h2>
+        <input type="text" id="search" class="search-input" onkeyup="filterDays()"
+            placeholder="Axtar: bazar ertəsi, səhər yeməyi, toyuq...">
+
+        <!-- Yemək günləri burada saxlanılır -->
+
+        <!-- <div class="meal-day">
+            <div class="meal-header" onclick="toggleContent(this)">Bazar ertəsi (2200 kcal)</div>
+            <div class="meal-content">
+                <ul>
+                    <li><strong>Səhər yeməyi:</strong> Fransız Omleti (3 yumurta, pomidor, ispanaq, parmesan pendiri)
+                    </li>
+                    <li><strong>Qəlyanaltı:</strong> Qızardılmış badam və alma (darçın və bal əlavə edilmiş)</li>
+                    <li><strong>Günorta yeməyi:</strong> Qril toyuq döşü, qəhvəyi düyü və buxarda brokkoli</li>
+                    <li><strong>Məşqdən sonra:</strong> Protein shake (banan, badam südü, protein tozu)</li>
+                    <li><strong>Axşam yeməyi:</strong> Rozmarinlə qızardılmış mal əti və tərəvəz salatı</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="meal-day">
+            <div class="meal-header" onclick="toggleContent(this)">Çərşənbə axşamı (2000 kcal)</div>
+            <div class="meal-content">
+                <ul>
+                    <li><strong>Səhər yeməyi:</strong> Yulaf sıyığı (badam südü, qoz, darçın)</li>
+                    <li><strong>Qəlyanaltı:</strong> Armud və çedar pendiri</li>
+                    <li><strong>Günorta yeməyi:</strong> Ləpəli mərci şorbası və tərəvəz salatı</li>
+                    <li><strong>Axşam yeməyi:</strong> Sobada ağ şərabla marinad edilmiş balıq və tərəvəzlər</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="meal-day">
+            <div class="meal-header" onclick="toggleContent(this)">Çərşənbə (2200 kcal)</div>
+            <div class="meal-content">
+                <ul>
+                    <li><strong>Səhər yeməyi:</strong> Qaynadılmış yumurta, avokado, tam buğda çörəyi</li>
+                    <li><strong>Qəlyanaltı:</strong> Fındıq və quru ərik</li>
+                    <li><strong>Günorta yeməyi:</strong> Sarımsaq və rozmarinlə sobada mal əti, qarabaşaq, tərəvəzlər
+                    </li>
+                    <li><strong>Məşqdən sonra:</strong> Çiyələkli protein smoothie (qatıq və protein tozu ilə)</li>
+                    <li><strong>Axşam yeməyi:</strong> Toyuq döşü salatı (qulançar və cherry pomidor ilə)</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="meal-day">
+            <div class="meal-header" onclick="toggleContent(this)">Cümə axşamı (1800 kcal)</div>
+            <div class="meal-content">
+                <ul>
+                    <li><strong>Səhər yeməyi:</strong> Qatıq, qoz və bal</li>
+                    <li><strong>Qəlyanaltı:</strong> Alma dilimləri və qovrulmuş çərəzlər</li>
+                    <li><strong>Günorta yeməyi:</strong> Noxud salatı (limon, cəfəri, pomidor və zeytun yağı ilə)</li>
+                    <li><strong>Axşam yeməyi:</strong> İtalyan omleti (yumurta və tərəvəzlərlə)</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="meal-day">
+            <div class="meal-header" onclick="toggleContent(this)">Cümə (2200 kcal)</div>
+            <div class="meal-content">
+                <ul>
+                    <li><strong>Səhər yeməyi:</strong> Yumurta ağı və ispanaqlı omlet, tam buğda çörəyi</li>
+                    <li><strong>Qəlyanaltı:</strong> Təbii qatıq və giləmeyvə</li>
+                    <li><strong>Günorta yeməyi:</strong> Bişmiş toyuq döşü, sobada şirin kartof, yaşıl salat</li>
+                    <li><strong>Məşqdən sonra:</strong> Vanilli protein shake və ya meyvəli qatıq</li>
+                    <li><strong>Axşam yeməyi:</strong> Mal əti filetosu, sobada tərəvəz</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="meal-day">
+            <div class="meal-header" onclick="toggleContent(this)">Şənbə (2300 kcal)</div>
+            <div class="meal-content">
+                <ul>
+                    <li><strong>Səhər yeməyi:</strong> Yulaf sıyığı (badam südü, banan, fıstıq əzməsi)</li>
+                    <li><strong>Qəlyanaltı:</strong> Qarışıq çərəzlər</li>
+                    <li><strong>Günorta yeməyi:</strong> Rozmarin və limonla bişmiş toyuq döşü, qarabaşaq, tərəvəzlər
+                    </li>
+                    <li><strong>Məşqdən sonra:</strong> Meyvəli protein smoothie və ya kəsmik</li>
+                    <li><strong>Axşam yeməyi:</strong> Gourmet mal əti salatı (fındıq, göyərti, albalı pomidor)</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="meal-day">
+            <div class="meal-header" onclick="toggleContent(this)">Bazar günü (1700 kcal)</div>
+            <div class="meal-content">
+                <ul>
+                    <li><strong>Səhər yeməyi:</strong> Qaynadılmış yumurta və tam buğda çörəyi</li>
+                    <li><strong>Qəlyanaltı:</strong> Mövsümi meyvələr</li>
+                    <li><strong>Günorta yeməyi:</strong> Balıq və ya dəniz məhsulu salatı</li>
+                    <li><strong>Axşam yeməyi:</strong> Tərəvəz şorbası və yaşıl salat</li>
+                </ul>
+            </div>
+        </div> -->
+
+        <div id="plan-container"></div>
+
+    </div>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('service-worker.js')
+                .then(reg => {
+                    console.log('Service Worker qeydiyyatdan keçdi:', reg);
+                    reg.update();
+                })
+        }
+    </script>
+    <script>
+        async function planlariYukle() {
+            const container = document.querySelector(".container");
+            try {
+                const res = await fetch("plans.json");
+                const plans = await res.json();
+
+                plans.forEach(plan => {
+                    const planHtml = `
+                    <div class="meal-day">
+                      <div class="meal-header" onclick="toggleContent(this)">${plan.gun} (${plan.kalori} kcal)</div>
+                      <div class="meal-content">
+                        <ul>
+                          ${plan.menyu.map(item => `<li><strong>${item.ad}:</strong> ${item.təsvir}</li>`).join("")}
+                        </ul>
+                      </div>
+                    </div>
+                  `;
+                    container.insertAdjacentHTML("beforeend", planHtml);
+                });
+            } catch (err) {
+                console.error("Plan yüklənərkən xəta:", err);
+            }
+        }
+
+        window.addEventListener("DOMContentLoaded", planlariYukle);
+    </script>
+
+
+</body>
+
+</html>
